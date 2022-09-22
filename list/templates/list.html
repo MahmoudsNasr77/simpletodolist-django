@@ -1,0 +1,67 @@
+{% load static  %} 
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<title>To Do List</title>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="bg-dark" >
+  <div class="container">     
+    <div class="row">
+  <h3 class="text-center text-light p-2"> ماذا سوف تصنع اليوم <h3>
+  </div>
+</div>
+      <div class="container">     
+        <div class="row">
+            <div class="col-4 text-light">
+
+                    <h3>اضافه مهمه </h3>
+                    {% load bootstrap4 %}  
+               <form method="post" class="form" enctype="multipart/form-data" id="comment">
+                 {% csrf_token %}
+                {% bootstrap_form form %}
+                 {% buttons %}
+                <button type="submit" class="btn btn-light m-2">اضافه</button>
+                
+                {% endbuttons %}
+              </form>
+            </div>
+     <div class="col-12 text-light ">
+            <table class="table text-light">
+                <thead>
+                  <tr>
+                    <th scope="col">مهمه رقم </th>
+                    <th scope="col">المهمه</th>
+                    <th scope="col">عدد الساعات </th>
+                    <th scope="col">عدد الدقائق</th>
+                   
+
+                  </tr>
+                </thead>
+                {%for l in list_view%}
+                <tbody>
+
+                  <tr>
+                    <th scope="row">{{l.id}}</th>
+                    <td>{{l.Tode_item}}</td>
+                    <td>{{l.hour}}</td>
+                    <td>{{l.minute}}</td>
+                    <td class><a class="text-success" href="delete/{{l.id}}"> تمت</a></td>
+                    </tr>
+
+                </tbody>
+                {%endfor%}
+              </table>
+
+
+        </div>
+    </div>
+      </div>
+    <script src="{%static 'js/bootstrap.min.js' %}"></script>
+    <script src="{%static 'js/jquery-3.4.1.min.js' %}"></script>
+</body>
+
+</html>
